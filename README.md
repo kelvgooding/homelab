@@ -15,7 +15,7 @@ Ubuntu
 | Component | Specification |
 |-----------|---------------|
 | RAM       | 512MB         |
-| HDD       | 5GB           |
+| HDD       | 20GB          |
 | CPU       | 1             |
 
 ## VM's (Virtual Machines)
@@ -31,7 +31,7 @@ Red Hat Enterprise Linux 9
 | Component | Specification |
 |-----------|---------------|
 | RAM       | 512MB         |
-| HDD       | 5GB           |
+| HDD       | 20GB          |
 | CPU       | 1             |
 
 * [vm_core](README_vm_core.md)
@@ -45,5 +45,5 @@ Red Hat Enterprise Linux 9
 | Component | Specification |
 |-----------|---------------|
 | RAM       | 512MB         |
-| HDD       | 5GB           |
+| HDD       | 20GB          |
 | CPU       | 1             |
