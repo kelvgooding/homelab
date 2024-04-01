@@ -3,12 +3,13 @@
 ## Contents
 
 1. [Setup](#1-setup)
-2. [Python Scripts](#5-python-scripts)
-3. [Shell Scripts](#6-shell-scripts)
-4. [GitHib](#9-github)
-5. [Cron](#11-cron)
+2. [GitHub](#2-github)
+3. [Scripts](#3-scripts)
+4. [Cron](#4-cron)
 
 ## 1. Setup
+
+> NOTE: Before proceeding, Power off the VM, and take a Snapshot.
 
 The following packages should be installed on this server. This has been done by the ansible-playbook from the WSL server:
 
@@ -19,9 +20,35 @@ The following packages should be installed on this server. This has been done by
 - zip
 - net-tools
 
-## 2. Shell Scripts
+## 2. GitHub
 
-Transfer the following directories and files to: ```/home/`whoami`/scripts/shell```:
+GitHub must be set up with an SSH key's to allow the cloning of repositories from GitHub. To achieve this, follow the below steps.
+
+Run the following command to generate the ssh key:
+
+```
+ssh-keygen -t rsa -b 4096
+```
+
+Run the following command to view the newly generated key:
+
+```
+cat ~/.ssh/id_rsa.pub
+```
+
+Copy the newly generated ssh key to GitHub using the following link: https://github.com/settings/keys
+
+Run the following command to clone the homelab repo:
+
+```
+git clone git@github.com:kelvgooding/homelab.git
+```
+
+## 3. Scripts
+
+### Shell Scripts
+
+The following Shell scripts should be avaible in ```/home/`whoami`/homelab/scripts/shell```:
 
 ```
 ├─ shell/
@@ -33,13 +60,13 @@ Transfer the following directories and files to: ```/home/`whoami`/scripts/shell
 Update the permissions of these scripts to executable:
 
 ```
-chmod +x /home/`whoami`/scripts/shell/*
+chmod +x /home/`whoami`/homelab/scripts/shell/*
 ```
 
 Run the following script to finalise the setup/configuration for the vm_snowmoon server:
 
 ```
-cd ~/scripts/shell
+cd ~/homelab/scripts/shell
 ```
 
 > NOTE: This is an interactive script.
@@ -48,9 +75,9 @@ cd ~/scripts/shell
 ./vm_snowmoon_setup.sh
 ```
 
-## 3. Python Scripts
+### Python Scripts
 
-Transfer the following directories and files to: ```/home/`whoami`/scripts/python```:
+The following Python scripts should be avaible in ```/home/`whoami`/homelab/scripts/shell```:
 
 ```
 ├─ python/
@@ -62,13 +89,7 @@ Transfer the following directories and files to: ```/home/`whoami`/scripts/pytho
 │  ├─ smtp_server_restarted.py
 ```
 
-## 4. GitHub
-
-GitHub must be set up with an SSH key's to allow the cloning of repositories from GitHub. To achieve this, follow the below steps.
-
-> NOTE: Copy the newly generated ssh key to GitHub using the following link: https://github.com/settings/keys
-
-## 5. Cron
+## 4. Cron
 
 The below should be added into Cron:
 
@@ -80,17 +101,17 @@ select option 2. /user/bin/vim.basic
 ```
 ## Server Info
 
-00 06 * * 1-7 /home/`whoami`/scripts/shell/system_info.sh > /mnt/bkup/system_info_`hostname`_`date +\%Y\%m\%d`.log 2>&1
+00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/system_info.sh > /mnt/bkup/system_info_`hostname`_`date +\%Y\%m\%d`.log 2>&1
 
-00 06 * * 1-7 /home/`whoami`/scripts/shell/package_version.sh > /mnt/bkup/package_versions_`hostname`_`date +\%Y\%m\%d`.log 2>&1
+00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/package_version.sh > /mnt/bkup/package_versions_`hostname`_`date +\%Y\%m\%d`.log 2>&1
 
-00 06 * * 1-7 /home/`whoami`/scripts/shell/network_info.sh > /mnt/bkup/network_info_`hostname`_`date +\%Y\%m\%d`.log 2>&1
+00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/network_info.sh > /mnt/bkup/network_info_`hostname`_`date +\%Y\%m\%d`.log 2>&1
 
 00 06 * * 1-7 sudo ufw status > /mnt/bkup/ufw_status_`hostname`_`date +\%Y\%m\%d`.log 2>&1
 
 ## Backup
 
-00 02 * * 1-7 python3 /home/`whoami`/scripts/python/database_bkup.py
+00 02 * * 1-7 python3 /home/`whoami`/homelab/scripts/python/database_bkup.py
 
 ## Applications
 
@@ -104,9 +125,7 @@ select option 2. /user/bin/vim.basic
 
 ## Python Scripts
 
-@reboot sleep 60 && python3 /home/`whoami`/scripts/python/smtp_server_restarted.py
+@reboot sleep 60 && python3 /home/`whoami`/homelab/scripts/python/smtp_server_restarted.py
 
-00 00 * * 1-7 python3 /home/`whoami`/scripts/python/dir_setup_logs.py
+00 00 * * 1-7 python3 /home/`whoami`/homelab/scripts/python/dir_setup_logs.py
 ```
-
---- End of Document ---
