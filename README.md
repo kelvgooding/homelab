@@ -15,7 +15,7 @@ Ubuntu
 | Component | Specification |
 |-----------|---------------|
 | RAM       | 512MB         |
-| HDD       | 20GB          |
+| HDD       | 5GB           |
 | CPU       | 1             |
 
 ## VM's (Virtual Machines)
@@ -34,6 +34,8 @@ Red Hat Enterprise Linux 9
 | HDD       | 20GB          |
 | CPU       | 1             |
 
+> NOTE: Once the OS has been installed, power off the VM and create a Snapshot.
+
 * [vm_core](README_vm_core.md)
 
 **OS Distribution:**
@@ -47,3 +49,5 @@ Red Hat Enterprise Linux 9
 | RAM       | 512MB         |
 | HDD       | 20GB          |
 | CPU       | 1             |
+
+> NOTE: Once the OS has been installed, power off the VM and create a Snapshot.
