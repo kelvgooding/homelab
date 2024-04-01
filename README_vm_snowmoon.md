@@ -77,7 +77,7 @@ cd ~/homelab/scripts/shell
 
 ### Python Scripts
 
-The following Python scripts should be avaible in ```/home/`whoami`/homelab/scripts/shell```:
+The following Python scripts should be avaible in ```/home/`whoami`/homelab/scripts/python```:
 
 ```
 ├─ python/
@@ -87,6 +87,19 @@ The following Python scripts should be avaible in ```/home/`whoami`/homelab/scri
 │  │  ├─ __init__.py
 │  ├─ dir_setup_logs.py
 │  ├─ smtp_server_restarted.py
+│  ├─ generate_config.py
+```
+
+Run the following script to finalise the setup/configuration for the vm_snowmoon server:
+
+```
+cd ~/homelab/scripts/python
+```
+
+> NOTE: This is an interactive script.
+
+```
+python3 generate_config.py
 ```
 
 ## 4. Cron
