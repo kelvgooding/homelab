@@ -1,0 +1,9 @@
+---
+
+- name: "Download file via URL - {{ current_time }}"
+  get_url:
+    url: https://get.jenkins.io/war-stable/latest/jenkins.war
+    dest: "/home/{{ ansible_user}}"
+  loop: "{{ dir_names }}"
+
+  

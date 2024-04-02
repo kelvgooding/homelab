@@ -1,0 +1,6 @@
+---
+
+- name: Operating system information
+  hosts: all
+  roles:
+    - os_distribution

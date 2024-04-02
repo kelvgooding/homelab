@@ -1,0 +1,39 @@
+---
+
+- name: vm_core - Server setup & configuration
+  hosts: vm_core
+  become: true
+  vars:
+    ubuntu_packages:
+      - git
+      - network-manager
+      - openssh-client
+      - openssh-server
+      - python3
+      - python3-pip
+      - sshpass
+      - zip
+      - net-tools
+      - docker
+      - ansible-core
+    rhel_packages:
+      - git
+      - python3
+      - python3-pip
+      - sshpass
+      - zip
+      - net-tools
+      - docker
+      - ansible-core
+    pip_packages:
+      - flask
+      - pip==22.3.1
+    dir_names:
+      - "/etc/ansible"
+  roles:
+    - linux_network_connectivity
+    - linux_update
+    - linux_package_install
+    - linux_create_dirs
+    - network_dns_update
+    - pip_package_install

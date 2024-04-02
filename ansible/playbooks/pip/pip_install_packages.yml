@@ -1,0 +1,11 @@
+---
+
+- name: Install Python Packages
+  hosts: vm_core
+  vars:
+    pip_package_names:
+      - pip==22.3.1
+      - git
+      - requestshtml
+  roles:
+    - pip_install_packages

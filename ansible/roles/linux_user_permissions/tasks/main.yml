@@ -1,0 +1,3 @@
+---
+- name: "User Permissions - Updating /etc/sudoers file to include {{ansible_user}}"
+  shell: "echo '{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers"
