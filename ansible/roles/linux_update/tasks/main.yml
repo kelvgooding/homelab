@@ -1,0 +1,13 @@
+---
+# tasks file for ubuntu_package_upd
+#
+- name: "Security - Updating Ubuntu Packages - {{ current_time }}"
+  apt:
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: "Security - Updating Red Hat Packages - {{ current_time }}"
+  yum:
+    name: "*"
+    state: latest
+  when: ansible_distribution == "RedHat"

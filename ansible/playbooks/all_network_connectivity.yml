@@ -1,0 +1,7 @@
+---
+
+- name: Network connectivity test 
+  hosts: all
+  roles:
+    - linux_network_connectivity
+    - win_network_connectivity

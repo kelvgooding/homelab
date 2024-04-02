@@ -1,0 +1,8 @@
+---
+
+- name: Reboot linux servers
+  hosts: localhost
+  become: true
+  roles:
+    - linux_reboot
+    - linux_network_connectivity

@@ -1,0 +1,6 @@
+---
+# tasks file for os_distribution
+#
+- name: Install pip Packages
+  pip:
+    name: "{{ pip_packages }}"
