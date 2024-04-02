@@ -1,0 +1,9 @@
+[vm_core]
+xxx.xxx.xx.x
+
+[vm_snowmoon]
+xxx.xxx.xx.x
+
+[vm:children]
+vm_snowmoon
+vm_core
