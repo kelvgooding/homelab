@@ -1,7 +1,7 @@
 ---
 
-- name: vm_core - Server setup & configuration
-  hosts: vm_core
+- name: vm_snowmoon_dev - Server setup & configuration
+  hosts: vm_snowmoon_dev
   become: true
   vars:
     ubuntu_packages:
@@ -14,8 +14,6 @@
       - sshpass
       - zip
       - net-tools
-      - docker
-      - ansible-core
     rhel_packages:
       - git
       - python3
@@ -23,15 +21,17 @@
       - sshpass
       - zip
       - net-tools
-      - docker
-      - ansible-core
     pip_packages:
       - flask
-      - pip==22.3.1
+      - pip==22.3.1 
+    dir_names:
+      - "/home/{{ ansible_user }}/apps"
+      - "/home/{{ ansible_user }}/.ssh"
   roles:
     - linux_network_connectivity
     - linux_update
     - linux_package_install
     - linux_create_dirs
+    - linux_user_permissions
     - network_dns_update
     - pip_package_install
