@@ -15,7 +15,7 @@ import shutil
 
 # Variables
 
-base_path = f'/home/{os.environ.get("USER")}/homelab/ansible/'
+base_path = f'/home/{os.environ.get("USER")}/homelab/ansible'
 filename = 'inventory'
 dt = datetime.today().strftime("%d%m%Y_%H%M%S")
 
@@ -64,8 +64,18 @@ def generate_inventory(inventory_group, server_group):
             pass
 
 def generate_group_vars():
+
+    # If ~/homelab/ansible/group_vars does not exists, create it
+
+    if os.path.isdir(f'/home/{os.environ.get("USER")}/homelab/ansible/group_vars'):
+        pass
+    else:
+        os.mkdir(f'/home/{os.environ.get("USER")}/homelab/ansible/group_vars')
+
+    # Create a group vars file for each hostname
+
     for item in hostname_vm:
-        with open(os.path.join(base_path, f'{item}.yml'), 'w') as f:
+        with open(os.path.join(f'/home/{os.environ.get("USER")}/homelab/ansible/group_vars/', f'{item}.yml'), 'w') as f:
             f.write('---')
             f.write('\nansible_user: ')
             f.write('\nansible_password: ')
