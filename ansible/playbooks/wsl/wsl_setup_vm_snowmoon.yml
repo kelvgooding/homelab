@@ -1,7 +1,7 @@
 ---
 
 - name: vm_snowmoon - Server setup & configuration
-  hosts: vm_snowmoon
+  hosts: vm-snowmoon
   become: true
   vars:
     ubuntu_packages:
