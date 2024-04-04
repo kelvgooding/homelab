@@ -1,65 +1,79 @@
 """
 Author: Kelv Gooding
 Created: 2024-02-03
-Updated: 2024-02-07
-Version: 1.1
-Description: A script to create the inventory file for Ansible.
+Updated: 2024-04-04
+Version: 1.2
+Description: A python script to generate the inventory file for Ansible.
 """
 
 # Modules
 
 import socket
 import os
+from datetime import datetime
+import shutil
 
 # Variables
 
-base_path = '/etc/ansible'
+base_path = f'/home/{os.environ.get("USER")}/homelab/ansible/'
 filename = 'inventory'
-abs_path = os.path.join(base_path, filename)
+dt = datetime.today().strftime("%d%m%Y_%H%M%S")
 
 # Arrays
 
 hostname_vm = [
-    'snowmoon',
+    'vm-snowmoon',
+    'vm-core',
 ]
 
 # Script
 
-# Remove inventory file if this already exists
+def generate_inventory(inventory_group, server_group):
 
-os.remove(abs_path)
+    # If inventory file already exists, creating a copy named inventory_ddmmyyyy_hhmmss
 
-def gather_ips(inventory_group, server_group):
+    if os.path.isfile(os.path.join(base_path, filename)):
+        print(f'{os.path.join(base_path, filename)} file already exists. {os.path.join(base_path, filename)} has been renamed to {os.path.join(base_path, filename)}_{dt}')
+        shutil.copy(f'{os.path.join(base_path, filename)}', f'{os.path.join(base_path, filename)}_{dt}')
 
-    # Generate Inventory file
+    # Creating inventory file
 
-    with open(abs_path, 'a') as f:
+    with open(os.path.join(base_path, filename), 'a') as f:
         try:
             for hostname in server_group:
 
-                # Check if IP can be obtained
+                # Check if IP can be obtained from hostname
 
-                socket.gethostbyname(hostname)
+                ip_address = socket.gethostbyname(hostname)
 
                 # Write hostname and IP address to inventory file
 
-                s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-                s.connect(("8.8.8.8", 80))
                 f.write(f'[{hostname}]\n')
-                f.write(f'{s.getsockname()[0]}\n\n')
+                f.write(f'{ip_address}\n\n')
 
             # Create a group for the hosts
 
             f.write(f'[{inventory_group}:children]\n')
-            for a in server_group:
-                f.write(f'{a}\n')
+            for item in server_group:
+                f.write(f'{item}\n')
             f.write('\n')
-    
-        # If IP cannot be found, continue to iterate
+
+        # If IP address cannot be found from the hostname, continue to iterate
 
         except socket.gaierror:
             pass
 
-gather_ips('vm', hostname_vm)
+def generate_group_vars():
+    for item in hostname_vm:
+        with open(os.path.join(base_path, f'{item}.yml'), 'w') as f:
+            f.write('---')
+            f.write('\nansible_user: ')
+            f.write('\nansible_password: ')
+            f.write('\nansible_become_user: ')
+            f.write('\nansible_become_pass: ')
+            f.write('\n\ncurrent_time: "{{ ansible_date_time.hour }}:{{ ansible_date_time.minute }}:{{ ansible_date_time.minute }}"')
 
-print(f'{base_path}/{filename} has now been generated')
+generate_inventory('vm', hostname_vm)
+generate_group_vars()
+
+print(f'{base_path}/{filename} has now been generated.')
