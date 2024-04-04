@@ -3,14 +3,14 @@
 ## Contents
 
 1. [Setup](#1-setup)
-2. [Ansible Scripts](#2-ansible-scripts)
-3. [Shell Scripts](#3-shell-scripts)
-4. [Python Scripts](#4-python-scripts)
-5. [GitHib](#5-github)
-6. [Docker Containers](#6-docker-containers)
-7. [Cron](#7-cron)
+2. [GitHub](#2-github)
+3. [Script](#3-script)
+4. [Docker Containers](#4-docker-containers)
+5. [Cron](#5-cron)
 
 ## 1. Setup
+
+> NOTE: Before proceeding, Power off the VM, and take a Snapshot.
 
 The following packages should be installed on this server. This has been done by the ansible-playbook from the WSL server:
 
@@ -23,44 +23,49 @@ The following packages should be installed on this server. This has been done by
 - Net-tools
 - Ansible
 
-## 2. Ansible Scripts
+## 2. GitHub
 
-Transfer the following directories and files to: ```/home/`whoami`/scripts/shell```:
+GitHub must be set up with an SSH key's to allow the cloning of repositories from GitHub. To achieve this, follow the below steps.
+
+Run the following command to generate the ssh key:
 
 ```
-├─ shell/
-│  ├─ network_info.sh
-│  ├─ package_version.sh
-│  ├─ server_info.sh
-│  ├─ vm_core_setup.sh
+ssh-keygen -t rsa -b 4096
 ```
+
+Run the following command to view the newly generated key:
+
+```
+cat ~/.ssh/id_rsa.pub
+```
+
+Copy the newly generated ssh key to GitHub using the following link: https://github.com/settings/keys
+
+Run the following command to clone the homelab repo:
+
+```
+cd ~
+```
+```
+git clone git@github.com:kelvgooding/homelab.git
+```
+
+## 3. Scripts
+
+### Shell Scripts
+
+The following shell scripts should be available following the cloning of the repo: https://github.com/kelvgooding/homelab/tree/main/scripts/shell
+
 Update the permissions of these scripts to executable:
 
 ```
-chmod +x /etc/ansible/playbooks/*
-```
-
-## 3. Shell Scripts
-
-Transfer the following directories and files to: ```/home/`whoami`/scripts/shell```:
-
-```
-├─ shell/
-│  ├─ network_info.sh
-│  ├─ package_version.sh
-│  ├─ server_info.sh
-│  ├─ vm_core_setup.sh
-```
-Update the permissions of these scripts to executable:
-
-```
-chmod +x /home/`whoami`/scripts/shell/*
+chmod +x /home/`whoami`/homelab/scripts/shell/*
 ```
 
 Run the following script to finalise the setup/configuration for the vm_core server:
 
 ```
-cd ~/scripts/shell
+cd ~/homelab/scripts/shell
 ```
 
 > NOTE: This is an interactive script.
@@ -69,27 +74,37 @@ cd ~/scripts/shell
 ./vm_core_setup.sh
 ```
 
-## 4. Python Scripts
+### Python Scripts
 
-Transfer the following directories and files to: ```/home/`whoami`/scripts/python```:
+The following python scripts should be available following the cloning of the repo: https://github.com/kelvgooding/homelab/tree/main/scripts/python
+
+Run the following script to finalise the setup/configuration for the vm_core server:
+
+> NOTE: This is an interactive script.
 
 ```
-├─ python/
-│  │  modules
-│  │  ├─ smtp_mail.py
-│  │  ├─ auth.py
-│  │  ├─ __init__.py
-│  ├─ dir_setup_logs.py
-│  ├─ smtp_server_restarted.py
+python3 ~/homelab/scripts/python/generate_config.py
 ```
 
-## 5. GitHub
+Run the following script to create the inventory and group_vars files for Ansible to run on the vm_core server:
 
-GitHub must be set up with an SSH key's to allow the cloning of repositories from GitHub. To achieve this, follow the below steps.
+```
+python3 ~/homelab/scripts/python/generate_inventory.py
+```
 
-> NOTE: Copy the newly generated ssh key to GitHub using the following link: https://github.com/settings/keys
+### Ansible Playbooks
 
-## 6. Docker Containers
+The following python scripts should be available following the cloning of the repo: https://github.com/kelvgooding/homelab/tree/main/ansible
+
+Run the following script to finalise the setup/configuration for the vm_core server:
+
+Update the permissions of these playbooks to executable:
+
+```
+chmod +x /home/`whoami`/homelab/ansible/playbooks/*
+```
+
+## 4. Docker Containers
 
 Run the following commands to pull the images:
 
@@ -113,7 +128,7 @@ sudo docker pull docker.io/jenkins/jenkins:lts
 docker run --name docker -p 8081:8080 -d jenkins/jenkins:lts
 ```
 
-## 7. Cron
+## 5. Cron
 
 The below should be added into Cron:
 
@@ -123,16 +138,12 @@ crontab -e
 select option 2. /user/bin/vim.basic
 
 ```
-## Applications
-
-@reboot sleep 60 && /home/`whoami`/scripts/shell/jenkins_start.sh >> /etc/jenkins/jenkins_`date +\%Y\%m\%d`.log 2>&1 &
-
 ## Python Scripts
 
-@reboot sleep 60 && python3 /home/`whoami`/scripts/python/smtp_server_restarted.py
+@reboot sleep 60 && python3 /home/`whoami`/homelab/scripts/python/smtp_server_restarted.py
 
 ## Ansible Playbooks
 
-00 06 * * 7 ansible-playbook /home/`whoami`/ansible/playbooks/linux/linux_patching.yml >> /home/`whoami`/ansible-linux-patching_`date +\%Y\%m\%d`.log 2>&1
+00 06 * * 7 ansible-playbook /home/`whoami`/homelab/ansible/playbooks/linux/linux_patching.yml >> /home/`whoami`/ansible-linux-patching_`date +\%Y\%m\%d`.log 2>&1
 
 ```
