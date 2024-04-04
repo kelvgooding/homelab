@@ -1,7 +1,7 @@
 ---
 
 - name: vm_core - Server setup & configuration
-  hosts: vm_core
+  hosts: vm-core
   become: true
   vars:
     ubuntu_packages:
