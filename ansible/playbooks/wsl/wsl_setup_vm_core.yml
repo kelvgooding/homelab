@@ -33,5 +33,6 @@
     - linux_update
     - linux_package_install
     - linux_create_dirs
+    - linux_bashrc_update
     - network_dns_update
     - pip_package_install
