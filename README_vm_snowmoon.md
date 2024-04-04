@@ -41,6 +41,9 @@ Copy the newly generated ssh key to GitHub using the following link: https://git
 Run the following command to clone the homelab repo:
 
 ```
+cd ~
+```
+```
 git clone git@github.com:kelvgooding/homelab.git
 ```
 
@@ -48,15 +51,8 @@ git clone git@github.com:kelvgooding/homelab.git
 
 ### Shell Scripts
 
-The following Shell scripts should be avaible in ```/home/`whoami`/homelab/scripts/shell```:
+The following shell scripts should be available following the cloning of the repo: https://github.com/kelvgooding/homelab/tree/main/scripts/shell
 
-```
-├─ shell/
-│  ├─ network_info.sh
-│  ├─ package_version.sh
-│  ├─ server_info.sh
-│  ├─ vm_snowmoon_setup.sh
-```
 Update the permissions of these scripts to executable:
 
 ```
@@ -77,29 +73,20 @@ cd ~/homelab/scripts/shell
 
 ### Python Scripts
 
-The following Python scripts should be avaible in ```/home/`whoami`/homelab/scripts/python```:
-
-```
-├─ python/
-│  │  modules
-│  │  ├─ smtp_mail.py
-│  │  ├─ auth.py
-│  │  ├─ __init__.py
-│  ├─ dir_setup_logs.py
-│  ├─ smtp_server_restarted.py
-│  ├─ generate_config.py
-```
+The following python scripts should be available following the cloning of the repo: https://github.com/kelvgooding/homelab/tree/main/scripts/python
 
 Run the following script to finalise the setup/configuration for the vm_snowmoon server:
-
-```
-cd ~/homelab/scripts/python
-```
 
 > NOTE: This is an interactive script.
 
 ```
-python3 generate_config.py
+python3 ~/homelab/scripts/python/generate_config.py
+```
+
+Run the following script to create the inventory and group_vars files for Ansible to run on the vm_snowmoon server:
+
+```
+python3 ~/homelab/scripts/python/generate_inventory.py
 ```
 
 ## 4. Cron
