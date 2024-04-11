@@ -104,9 +104,13 @@ Update the permissions of these playbooks to executable:
 chmod +x /home/`whoami`/homelab/ansible/playbooks/*
 ```
 
-## 4. Docker Containers
+## 4. Docker / Podman Containers
 
 Run the following commands to pull the images:
+
+```
+sudo -i
+```
 
 - MariaDB
 ```
@@ -118,14 +122,26 @@ sudo docker pull mariadb:latest
 ```
 sudo docker pull docker.io/library/nginx:latest
 ```
+### [Jenkins](https://hub.docker.com/r/jenkins/jenkins)
 
-- Jenkins
+Jenkins is used as a CI/CD pipeline to ensure the latest version is available for use from the main branch.
+
+1. Pull Jenkins image from Docker repository
 
 ```
-sudo docker pull docker.io/jenkins/jenkins:lts
+docker pull jenkins/jenkins
 ```
+2. Create a new container. This will create a container from the image which was pulled down in the previous atep.
+
 ```
-docker run --name docker -p 8081:8080 -d jenkins/jenkins:lts
+sudo docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
+```
+
+Allow firewall port for Jenkins. This will open the port's wih the values in add ports:
+
+```
+sudo firewall-cmd --add-port=8080/tcp --permanent
+sudo firewall-cmd --reload
 ```
 
 ## 5. Cron
@@ -145,5 +161,4 @@ select option 2. /user/bin/vim.basic
 ## Ansible Playbooks
 
 00 06 * * 7 ansible-playbook /home/`whoami`/homelab/ansible/playbooks/linux/linux_patching.yml >> /home/`whoami`/ansible-linux-patching_`date +\%Y\%m\%d`.log 2>&1
-
 ```
