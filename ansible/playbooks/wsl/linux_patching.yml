@@ -1,0 +1,10 @@
+---
+
+- name: Security - patching linux servers
+  hosts: localhost
+  become: true
+  roles:
+    - linux_update
+    - linux_reboot
+    - linux_network_connectivity
+
