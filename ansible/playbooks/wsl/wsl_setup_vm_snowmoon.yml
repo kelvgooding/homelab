@@ -12,14 +12,12 @@
       - python3
       - python3-pip
       - sshpass
-      - zip
       - net-tools
     rhel_packages:
       - git
       - python3
       - python3-pip
       - sshpass
-      - zip
       - net-tools
     pip_packages:
       - flask

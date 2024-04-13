@@ -1,7 +1,7 @@
 ---
 
-- name: vm_snowmoon_dev - Server setup & configuration
-  hosts: vm-snowmoon-dev
+- name: vm_snowmoon - Server setup & configuration
+  hosts: vm-snowmoon
   become: true
   vars:
     ubuntu_packages:
@@ -12,21 +12,27 @@
       - python3
       - python3-pip
       - sshpass
-      - zip
       - net-tools
     rhel_packages:
       - git
       - python3
       - python3-pip
       - sshpass
-      - zip
       - net-tools
     pip_packages:
       - flask
-      - pip==22.3.1 
+      - pip==22.3.1
     dir_names:
-      - "/home/{{ ansible_user }}/apps"
       - "/home/{{ ansible_user }}/.ssh"
+    port_numbers:
+      - 3000
+      - 3001
+      - 3002
+      - 3003
+      - 3004
+      - 3005
+      - 3006
+      - 3007
   roles:
     - linux_network_connectivity
     - linux_update
@@ -35,3 +41,4 @@
     - linux_user_permissions
     - network_dns_update
     - pip_package_install
+    - linux_firewall_allow
