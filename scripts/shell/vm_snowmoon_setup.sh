@@ -1,7 +1,7 @@
 # Author: Kelvin Gooding
 # Created: 2024-03-27
-# Updated: 2024-03-27
-# Version: 1.0
+# Updated: 2024-04-14
+# Version: 1.1
 
 clear
 echo "#######################################################"
@@ -24,12 +24,12 @@ echo "##################################"
 echo "########## Step 2: Apps ##########"
 echo "##################################"
 echo
-cd ~/apps
+cd ~/homelab/apps
 git clone git@github.com:kelvgooding/8ball-leaderboard.git
-pip install -r ~/apps/8ball-leaderboard/requirements.txt
-cd ..
+pip install -r ~/homelab/apps/8ball-leaderboard/requirements.txt
+cd ~/homelab/apps
 git clone git@github.com:kelvgooding/contacts.git
-pip install -r ~/apps/contacts/requirements.txt
+pip install -r ~/homelab/apps/contacts/requirements.txt
 cd ~
 echo
 echo "##############################"
