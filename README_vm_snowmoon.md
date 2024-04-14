@@ -74,12 +74,6 @@ Run the following script to finalise the setup/configuration for the vm_snowmoon
 python3 ~/homelab/scripts/python/generate_config.py
 ```
 
-Run the following script to create the inventory and group_vars files for Ansible to run on the vm_snowmoon server:
-
-```
-python3 ~/homelab/scripts/python/generate_inventory.py
-```
-
 ## 4. Cron
 
 The below should be added into Cron:
@@ -98,21 +92,19 @@ select option 2. /user/bin/vim.basic
 
 00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/network_info.sh > /mnt/bkup/network_info_`hostname`_`date +\%Y\%m\%d`.log 2>&1
 
-00 06 * * 1-7 sudo ufw status > /mnt/bkup/ufw_status_`hostname`_`date +\%Y\%m\%d`.log 2>&1
-
 ## Backup
 
 00 02 * * 1-7 python3 /home/`whoami`/homelab/scripts/python/database_bkup.py
 
 ## Applications
 
-@reboot sleep 60 && python3 /home/`whoami`/apps/contacts/app.py >> /mnt/bkup/app_contacts_`date +\%Y\%m\%d`.log 2>&1 &
+@reboot sleep 60 && python3 /home/`whoami`/homelab/apps/contacts/app.py >> /mnt/bkup/app_contacts_`date +\%Y\%m\%d`.log 2>&1 &
 
-@reboot sleep 60 && python3 /home/`whoami`/apps/8ball-leaderboard/app.py >> /mnt/bkup/app_8ball-leaderboard_`date +\%Y\%m\%d`.log 2>&1 &
+@reboot sleep 60 && python3 /home/`whoami`/homelab/apps/8ball-leaderboard/app.py >> /mnt/bkup/app_8ball-leaderboard_`date +\%Y\%m\%d`.log 2>&1 &
 
-00 00 * * 1-7 python3 /home/`whoami`/apps/crypto_spot_price/build/crypto-spot-price.py
+00 00 * * 1-7 python3 /home/`whoami`/homelab/apps/crypto_spot_price/build/crypto-spot-price.py
 
-59 23 * * 1-7 python3 /home/`whoami`/apps/crypto_spot_price/build/crypto-spot-price.py
+59 23 * * 1-7 python3 /home/`whoami`/homelab/apps/crypto_spot_price/build/crypto-spot-price.py
 
 ## Python Scripts
 
