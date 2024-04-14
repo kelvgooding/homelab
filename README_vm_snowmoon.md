@@ -86,11 +86,11 @@ select option 2. /user/bin/vim.basic
 ```
 ## Server Info
 
-00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/system_info.sh > /mnt/bkup/system_info_`hostname`_`date +\%Y\%m\%d`.log 2>&1
+00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/system_info.sh > /home/`whoami`/homelab/system_info_`hostname`_`date +\%Y\%m\%d`.log 2>&1
 
-00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/package_version.sh > /mnt/bkup/package_versions_`hostname`_`date +\%Y\%m\%d`.log 2>&1
+00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/package_version.sh > /home/`whoami`/homelab/package_versions_`hostname`_`date +\%Y\%m\%d`.log 2>&1
 
-00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/network_info.sh > /mnt/bkup/network_info_`hostname`_`date +\%Y\%m\%d`.log 2>&1
+00 06 * * 1-7 /home/`whoami`/homelab/scripts/shell/network_info.sh > /home/`whoami`/homelab/network_info_`hostname`_`date +\%Y\%m\%d`.log 2>&1
 
 ## Backup
 
@@ -98,9 +98,9 @@ select option 2. /user/bin/vim.basic
 
 ## Applications
 
-@reboot sleep 60 && python3 /home/`whoami`/homelab/apps/contacts/app.py >> /mnt/bkup/app_contacts_`date +\%Y\%m\%d`.log 2>&1 &
+@reboot sleep 60 && python3 /home/`whoami`/homelab/apps/contacts/app.py >> /home/`whoami`/homelab/app_contacts_`date +\%Y\%m\%d`.log 2>&1 &
 
-@reboot sleep 60 && python3 /home/`whoami`/homelab/apps/8ball-leaderboard/app.py >> /mnt/bkup/app_8ball-leaderboard_`date +\%Y\%m\%d`.log 2>&1 &
+@reboot sleep 60 && python3 /home/`whoami`/homelab/apps/8ball-leaderboard/app.py >> /home/`whoami`/homelab/app_8ball-leaderboard_`date +\%Y\%m\%d`.log 2>&1 &
 
 00 00 * * 1-7 python3 /home/`whoami`/homelab/apps/crypto_spot_price/build/crypto-spot-price.py
 
