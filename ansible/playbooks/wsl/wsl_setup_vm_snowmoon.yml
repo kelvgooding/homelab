@@ -42,3 +42,4 @@
     - network_dns_update
     - pip_package_install
     - linux_firewall_allow
+    - git_clone_repositories
