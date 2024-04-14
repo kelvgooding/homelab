@@ -38,8 +38,9 @@
     - linux_update
     - linux_package_install
     - linux_create_dirs
+    - git_clone_repositories
     - linux_user_permissions
     - network_dns_update
     - pip_package_install
     - linux_firewall_allow
-    - git_clone_repositories
+
