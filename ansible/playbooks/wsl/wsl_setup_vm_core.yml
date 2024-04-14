@@ -26,11 +26,14 @@
     pip_packages:
       - flask
       - pip==22.3.1
+    dir_names:
+      - "/home/{{ ansible_user }}/.ssh"
   roles:
     - linux_network_connectivity
     - linux_update
     - linux_package_install
+    - pip_package_install    
     - linux_create_dirs
     - linux_bashrc_update
     - network_dns_update
-    - pip_package_install
+    - git_clone_repositories
