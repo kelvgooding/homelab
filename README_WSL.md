@@ -72,6 +72,30 @@ git clone git@github.com:kelvgooding/homelab.git
 
 ## 4. Ansible Playbooks
 
+Before running any ansible playbooks, run the following python scripts. This will generate the inventory file for ansible:
+
+> NOTE: Amend the array name within this script if the server names are changed.
+
+```
+python3 ~/homelab/scripts/python/generate_inventory.py
+```
+
+Edit the following files inside of the following directory to include the user and root credentials the server(s). These files are generated from running generate_inventory.py:
+
+```
+cd ~/homelab/ansible/group_vars
+```
+
+Run the following playbook to ensure that a connection can be establisted to the server(s):
+
+```
+cd ~/homelab/ansible/playbooks
+```
+
+```
+ansible-playbook all_network_connectivity
+```
+
 ### vm_snowmoon
 
 Run the following command to check the playbook will run successfully:
@@ -84,10 +108,28 @@ cd ~/homelab/ansible/playbooks/wsl
 nohup ansible-playbook wsl_setup_vm_snowmoon.yml --check >> ~/homelab/logs/ansible_playbook_setup_vm_snowmoon_check_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
 ```
 
+The logs can be found in the following location:
+
+```
+cd ~/homelab/logs
+```
+```
+cat $(ls -t | head -n1)
+```
+
 If sucessful, run the following command to setup and configuration of vm_snowmoon:
 
 ```
 nohup ansible-playbook wsl_setup_vm_snowmoon.yml >> ~/homelab/logs/ansible_playbook_setup_vm_snowmoon_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
+```
+
+The logs can be found in the following location:
+
+```
+cd ~/homelab/logs
+```
+```
+cat $(ls -t | head -n1)
 ```
 
 Once this playbook is complete, the configuration can be found here:
@@ -106,10 +148,28 @@ Run the following command to check the playbook will run successfully:
 nohup ansible-playbook wsl_setup_vm_core.yml --check >> ~/homelab/logs/ansible_playbook_setup_vm_core_check_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
 ```
 
+The logs can be found in the following location:
+
+```
+cd ~/homelab/logs
+```
+```
+cat $(ls -t | head -n1)
+```
+
 If successful, run the following command to setup and configuration of vm_core:
 
 ```
 nohup ansible-playbook wsl_setup_vm_core.yml >> ~/homelab/logs/ansible_playbook_setup_vm_core_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
+```
+
+The logs can be found in the following location:
+
+```
+cd ~/homelab/logs
+```
+```
+cat $(ls -t | head -n1)
 ```
 
 Once this playbook is complete, the configuration can be found here:
