@@ -93,7 +93,7 @@ cd ~/homelab/ansible/playbooks
 ```
 
 ```
-ansible-playbook all_network_connectivity
+ansible-playbook all_network_connectivity.yml
 ```
 
 ### vm_snowmoon
