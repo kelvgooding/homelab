@@ -41,15 +41,6 @@ cat ~/.ssh/id_rsa.pub
 
 Copy the newly generated ssh key to GitHub using the following link: https://github.com/settings/keys
 
-Run the following command to clone the homelab repo:
-
-```
-cd ~
-```
-```
-git clone git@github.com:kelvgooding/homelab.git
-```
-
 ## 3. Scripts
 
 ### Shell Scripts

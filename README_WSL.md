@@ -4,9 +4,8 @@
 
 1. [Installation](#1-installation)
 2. [Setup](#2-setup)
-3. [Ansible](#3-ansible)
-4. [Soft Links](#4-soft-links)
-5. [Configuration Management](#5-configuration-management)
+3. [GitHub](#3-github)
+4. [Ansible Playbooks](#5-ansible-playbooks)
 
 ## 1. Installation
 
@@ -44,98 +43,51 @@ Install Ansible:
 sudo apt install -y ansible sshpass
 ```
 
-## 3. Ansible
+## 3. GitHub
 
-The **Ansible** directiory needs to be added to ```/etc/ansible```
+GitHub must be set up with an SSH key's to allow the cloning of repositories from GitHub. To achieve this, follow the below steps.
 
-```
-mkdir /etc/ansible
-```
-
-Change the owner of the /etc/ansible directory:
+Run the following command to generate the ssh key:
 
 ```
-sudo chown `whoami`:`whoami` /etc/ansible
+ssh-keygen -t rsa -b 4096
 ```
 
-Transfer the following files to the server:
+Run the following command to view the newly generated key:
 
 ```
-ansible/
-├─ group_vars/
-│  ├─ kelv_laptop
-│  ├─ kelv_pc
-│  ├─ vm_snowmoon
-│  ├─ vm_core
-├─ playbooks/
-│  ├─ all_network_connectivity.yml
-│  ├─ all_os_check.yml
-│  ├─ archived
-│  ├─ in_progress
-│  ├─ windows
-│  │  ├─ win_create_user.yml
-│  │  ├─ win_map_network_drive.yml
-│  │  ├─ win_reboot.yml
-│  │  ├─ win_setup_desktop.yml
-│  │  ├─ win_setup_downloads.yml
-│  │  ├─ win_setup_explorer.yml
-│  │  ├─ win_setup_full.yml
-│  │  ├─ win_setup_settings.yml
-│  │  ├─ win_setup_taskbar.yml
-│  │  ├─ win_shutdown.yml
-│  ├─linux
-│  │  ├─ linux_package_install.yml
-│  │  ├─ linux_patching.yml
-│  │  ├─ linux_reboot.yml
-│  ├─pip
-│  │  ├─ pip_install_packages.yml
-│  ├─wsl
-│  │  ├─ wsl_setup_vm_core.yml
-│  │  ├─ wsl_setup_vm_snowmoon.yml
-├─ roles/
-│  ├─ linux_create_dirs
-│  ├─ linux_network_connectivity
-│  ├─ linux_package_install
-│  ├─ linux_reboot
-│  ├─ linux_update
-│  ├─ linux_upgrade
-│  ├─ network_dns_update
-│  ├─ os_distribution
-│  ├─ pip_package_install
-│  ├─ url_file_download
-│  ├─ win_network_connectivity
-│  ├─ win_reboot
-│  ├─ win_shutdown
-├─ ansible.cfg
-├─ inventory
+cat ~/.ssh/id_rsa.pub
 ```
 
-## 4. Soft Links
+Copy the newly generated ssh key to GitHub using the following link: https://github.com/settings/keys
 
-Run the following commands to create soft links:
+Run the following command to clone the homelab repo:
 
 ```
-ln -s /etc/ansible /home/`whoami`
+cd ~
+```
+```
+git clone git@github.com:kelvgooding/homelab.git
 ```
 
-## 5. Ansible Playbooks
+## 4. Ansible Playbooks
 
 ### vm_snowmoon
 
 Run the following command to check the playbook will run successfully:
 
 ```
-cd ~/ansible/playbooks/wsl
+cd ~/homelab/ansible/playbooks/wsl
 ```
 
 ```
-nohup ansible-playbook wsl_setup_vm_snowmoon.yml --check >> /etc/ansible/logs/ansible_playbook_setup_vm_snowmoon_check_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
+nohup ansible-playbook wsl_setup_vm_snowmoon.yml --check >> ~/homelab/logs/ansible_playbook_setup_vm_snowmoon_check_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
 ```
 
 If sucessful, run the following command to setup and configuration of vm_snowmoon:
 
 ```
-nohup ansible-playbook wsl_setup_vm_snowmoon.yml >> /etc/ansible/logs/ansible_playbook_setup_vm_snowmoon_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
+nohup ansible-playbook wsl_setup_vm_snowmoon.yml >> ~/homelab/logs/ansible_playbook_setup_vm_snowmoon_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
 ```
 
 Once this playbook is complete, the configuration can be found here:
@@ -145,19 +97,19 @@ Once this playbook is complete, the configuration can be found here:
 ### vm_core
 
 ```
-cd ~/ansible/playbooks/wsl
+cd ~/homelab/ansible/playbooks/wsl
 ```
 
 Run the following command to check the playbook will run successfully:
 
 ```
-nohup ansible-playbook wsl_setup_vm_core.yml --check >> /etc/ansible/logs/ansible_playbook_setup_vm_core_check_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
+nohup ansible-playbook wsl_setup_vm_core.yml --check >> ~/homelab/logs/ansible_playbook_setup_vm_core_check_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
 ```
 
 If successful, run the following command to setup and configuration of vm_core:
 
 ```
-nohup ansible-playbook wsl_setup_vm_core.yml >> /etc/ansible/logs/ansible_playbook_setup_vm_core_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
+nohup ansible-playbook wsl_setup_vm_core.yml >> ~/homelab/logs/ansible_playbook_setup_vm_core_`date +\%Y\%m\%d_\%H\%M\%S`.log 2>&1 &
 ```
 
 Once this playbook is complete, the configuration can be found here:
