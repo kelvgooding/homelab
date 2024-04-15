@@ -131,7 +131,7 @@ The logs can be found in the following location:
 cd ~/homelab/logs
 ```
 ```
-cat $(ls -t | head -n1)
+tail -f $(ls -t | head -n1)
 ```
 
 Once this playbook is complete, the configuration can be found here:
@@ -155,7 +155,7 @@ The logs can be found in the following location:
 cd ~/homelab/logs
 ```
 ```
-cat $(ls -t | head -n1)
+tail -f $(ls -t | head -n1)
 ```
 
 If successful, run the following command to setup and configuration of vm_core:
