@@ -32,8 +32,8 @@
     - linux_network_connectivity
     - linux_update
     - linux_package_install
-    - pip_package_install    
     - linux_create_dirs
-    - linux_bashrc_update
-    - network_dns_update
     - git_clone_repositories
+    - linux_user_permissions
+    - network_dns_update
+    - pip_package_install
