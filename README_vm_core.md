@@ -125,7 +125,7 @@ docker pull jenkins/jenkins
 2. Create a new container. This will create a container from the image which was pulled down in the previous atep.
 
 ```
-sudo docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
+sudo docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
 ```
 
 Allow firewall port for Jenkins. This will open the port's wih the values in add ports:
