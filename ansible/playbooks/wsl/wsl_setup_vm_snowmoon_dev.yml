@@ -19,6 +19,7 @@
       - python3-pip
       - sshpass
       - net-tools
+      - java
     pip_packages:
       - flask
       - pip==22.3.1
