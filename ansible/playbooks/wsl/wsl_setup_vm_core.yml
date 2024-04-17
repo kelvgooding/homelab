@@ -23,6 +23,7 @@
       - net-tools
       - docker
       - ansible-core
+      - java
     pip_packages:
       - flask
       - pip==22.3.1
