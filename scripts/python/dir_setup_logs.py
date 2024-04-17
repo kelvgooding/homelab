@@ -1,8 +1,8 @@
 """
 Author: Kelvin Gooding
 Created: 2023-10-12
-Updated: 2023-10-26
-Version: 1.9
+Updated: 2024-04-17
+Version: 2.0
 """
 
 # Modules
@@ -26,7 +26,7 @@ dt_prev_day = reduced_days.strftime('%Y%m%d')
 
 # General Variables
 
-dir_path = '/mnt/bkup'
+dir_path = f'/home/{os.environ.get("USER")}/homelab/logs'
 
 # Script
 
@@ -49,7 +49,7 @@ elif dt_current_day == "01":
 else:
     os.mkdir(dt_current_month)
 
-# Creates a directory named: YYYYMMDD and YYYYMMDD/logs 
+# Creates a directory named: YYYYMMDD and YYYYMMDD/logs
 
 if dt_prev_day in os.listdir(dir_path):
     for log_file in Path(dir_path).glob(f"*{dt_prev_day}.log"):
