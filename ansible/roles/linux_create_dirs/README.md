@@ -6,26 +6,37 @@ linux_create_dirs
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Linux Packages:
+
+- N/A
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+N/A
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+N/A
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+This role is responsible for creating new directories on Linux servers. There is a variable required in the playbook named **dir_names**. Directories that need to be created, need to nested in this variable.
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```
+---
+
+- name: untitled
+- hosts: localhost
+-  dir_names:
+    - "/home/{{ ansible_user }}/dir_1"
+    - "/home/{{ ansible_user }}/dir_2"
+    - "/home/{{ ansible_user }}/dir_3
+   roles:
+     - linux_create_dirs
+```
 
 License
 -------
@@ -35,4 +46,5 @@ BSD
 Author Information
 ------------------
 
-Created by Kelvin Gooding - 22/09/2023
+- Author: Kelvin Gooding
+- Date Created: 22/09/2023
