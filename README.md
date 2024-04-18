@@ -14,7 +14,7 @@ Ubuntu
 
 | Component | Specification |
 |-----------|---------------|
-| RAM       | 512MB         |
+| RAM       | 1GB           |
 | HDD       | 20GB          |
 | CPU       | 1             |
 
