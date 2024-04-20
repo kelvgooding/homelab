@@ -4,16 +4,10 @@
 - name: "Security - Updating Ubuntu Packages - {{ current_time }}"
   apt:
     update_cache: yes
-  register: register_log
   when: ansible_distribution == "Ubuntu"
 
 - name: "Security - Updating Red Hat Packages - {{ current_time }}"
   yum:
     name: "*"
     state: latest
-  register: register_log
   when: ansible_distribution == "RedHat"
-
-- name: "Security - Updating Packages - Log"
-  debug:
-    var: register_log.stdout_lines
