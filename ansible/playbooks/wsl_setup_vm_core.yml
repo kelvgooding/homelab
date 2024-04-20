@@ -1,0 +1,19 @@
+---
+
+- name: vm-core - Server setup & configuration
+  hosts: vm-core
+  become: true
+  vars_files:
+    - ../vars/vars_dir_names.yml
+    - ../vars/vars_pip_packages.yml
+    - ../vars/vars_rhel_packages.yml
+    - ../vars/vars_ubuntu_packages.yml
+  roles:
+    - linux_network_connectivity
+    - linux_update
+    - linux_package_install
+    - linux_create_dirs
+    - git_clone_repositories
+    - linux_user_permissions
+    - network_dns_update
+    - pip_package_install
