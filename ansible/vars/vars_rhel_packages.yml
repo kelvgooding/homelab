@@ -1,0 +1,9 @@
+rhel_packages:
+  - git
+  - python3
+  - python3-pip
+  - sshpass
+  - net-tools
+  - docker
+  - ansible-core
+  - java
