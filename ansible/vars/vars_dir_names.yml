@@ -1,0 +1,2 @@
+dir_names:
+  - "/home/{{ ansible_user }}/.ssh"
