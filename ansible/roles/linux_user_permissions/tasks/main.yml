@@ -1,6 +1,0 @@
----
-- name: "User Permissions - Adding {{ansible_user}} to /etc/sudoers"
-  shell: "echo '{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers"
-
-- name: "User Permissions - Changing owner/group - /home/{{ansible_user}}/homelab"
-  shell: "sudo chown -R {{ansible_user}}:{{ansible_user}} /home/{{ansible_user}}/homelab"

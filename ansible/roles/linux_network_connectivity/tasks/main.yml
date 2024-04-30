@@ -1,5 +1,0 @@
----
-# tasks file for unbuntu_network_test
-#
-- name: "Networking - Check network connectivity - {{ current_time }}"
-  ping:

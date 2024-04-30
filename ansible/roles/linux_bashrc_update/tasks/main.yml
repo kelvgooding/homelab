@@ -1,5 +1,0 @@
----
-
-- name: Adding environment variables to ~/.bash.rc
-  shell: "echo 'export ANSIBLE_CONFIG=~/homelab/ansible/ansible.cfg' >> ~/.bashrc"
-
