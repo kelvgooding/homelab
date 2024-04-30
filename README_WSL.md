@@ -152,10 +152,7 @@ nohup ansible-playbook wsl_setup_vm_core.yml --check >> ~/homelab/logs/ansible_p
 The logs can be found in the following location:
 
 ```
-cd ~/homelab/logs
-```
-```
-tail -f $(ls -t | head -n1)
+tail -f ~/homelab/logs/$(ls -t | head -n1)
 ```
 
 If successful, run the following command to setup and configuration of vm_core:
@@ -170,10 +167,7 @@ nohup ansible-playbook wsl_setup_vm_core.yml >> ~/homelab/logs/ansible_playbook_
 The logs can be found in the following location:
 
 ```
-cd ~/homelab/logs
-```
-```
-cat $(ls -t | head -n1)
+tail -f ~/homelab/logs/$(ls -t | head -n1)
 ```
 
 Once this playbook is complete, the configuration can be found here:
