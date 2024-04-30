@@ -1,0 +1,8 @@
+---
+
+- name: Pull latest changes from Git repository - homelab
+  git:
+    repo: https://github.com/kelvgooding/homelab.git
+    dest: "/home/{{ ansible_user }}/homelab"
+    update: yes
+    force: yes

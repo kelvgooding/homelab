@@ -1,0 +1,6 @@
+---
+# tasks file for unbuntu_network_test
+#
+- name: "Network - ping Windows nodes - {{ current_time }}"
+  win_ping:
+  when: ansible_os_family == "Windows"

@@ -1,0 +1,6 @@
+---
+# tasks file for reboot
+#
+- name: "OS - Reboot Windows nodes - {{ current_time }}"
+  win_reboot:
+  when: ansible_os_family == "Windows"
