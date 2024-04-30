@@ -1,0 +1,17 @@
+---
+
+- name: Networking - Firewall Rules - Allow Outbound
+  shell: |
+    sudo firewall-cmd --list-all
+    {% for port in port_numbers %}
+      sudo firewall-cmd --add-port={{ port }}/tcp --permanent
+    {% endfor %}
+    sudo firewall-cmd --reload
+    sudo firewall-cmd --list-all
+  register: firewall_output
+  when: ansible_distribution == "RedHat"
+
+- name: Display reuslts
+  debug:
+    var: firewall_output.stdout_lines
+
