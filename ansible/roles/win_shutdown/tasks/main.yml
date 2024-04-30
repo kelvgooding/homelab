@@ -1,4 +1,0 @@
----
-- name: "OS - Shutdown Windows nodes - {{ current_time }}"
-  win_shell: shutdown /s /f /t 30
-  when: ansible_os_family == "Windows"

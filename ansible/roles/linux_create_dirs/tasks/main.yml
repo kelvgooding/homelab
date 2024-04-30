@@ -1,8 +1,0 @@
----
-
-- name: File System - Create directories
-  file:
-    state: directory
-    path: "{{ item }}"
-    mode: "0777"
-  loop: "{{ dir_names }}"

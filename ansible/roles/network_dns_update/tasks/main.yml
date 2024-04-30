@@ -1,6 +1,0 @@
----
-- name: Backup /etc/resolv.conf
-  shell:  "mv /etc/resolv.conf /etc/resolv.conf_ansible_{{ current_time }}"
-
-- name: Updating DNS (Domain Name Server)
-  shell: "echo 'nameserver 8.8.8.8' >> /etc/resolv.conf"
