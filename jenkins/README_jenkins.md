@@ -4,11 +4,15 @@
 
 By default, Jenkins stores all of its data in this directory on the file system /var/jenkins_home
 
-## Manage Jenkins - Users
+## Security: Users
 
-Navigate to Manage Jenkins - Create User
+Navigate to Manage Jenkins
 
-Complete the form
+Under Security, click Users
+
+Click + Create User
+
+Complete the form with the following details:
 
 - Username
 - Password
@@ -18,46 +22,56 @@ Complete the form
 
 Click Create User once the details have been entered.
 
-## Manage Jenkins - System
+## System Configuration: System
 
-Navigate to Manage Jenkins > System
+Navigate to Manage Jenkins
+
+Under System Configuration, Click System
 
 Under Jenkins location, fill in the following input boxes:
 
-- Update System Admin e-mail address
+Complete the form with the following details:
+
+- System Admin e-mail address
+
+Untick "Help make Jenkins better by sending annoymous usage statistics and crash reports to the Jenkins project.
 
 Click Save once the details have been entered.
 
-## Manage Jenkins - Nodes
+## System Configuration: Nodes
 
-Navigate to Manage Jenkins > Nodes
+Navigate to Manage Jenkins
 
-** Form 1 **
+Under System Configuration, Click Nodes
+
+Click + New Node
+
+### Form 1 - New Node
 
 Complete the form with the below details:
 
 - Node name
 
-Under Type, enable Permanet Agent
+Select Type: Permanent Agent
 
 Click Create one these details have been entered.
 
-** Form 2 **
+### Form 2
 
 Complete the form with the below details:
 
-- Description
+- Name: Server Name
+- Description: Server Name | OS
 - Number of executors: 1
 - Remote root directory: /home/kgooding/homelab/jenkins
 - Usage: Use this node as much as possible
 - Launch method: Launch agents via SSH
-
 - Enter IP address
 - Credentials: Add Jenkins
 
 > Note: the Remote root directory will generate folders and directories
 
-** Form 3 **
+### Form 3
 
 Complete the form with the below details:
 
