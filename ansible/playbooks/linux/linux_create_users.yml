@@ -1,0 +1,13 @@
+---
+
+- name: Create a new user account (Local)
+  hosts: localhost
+  become: true
+  vars:
+    users:
+      - user1
+      - user2
+      - user3
+  roles:
+    - linux_create_user
+
