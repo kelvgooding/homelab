@@ -1,0 +1,11 @@
+---
+
+- name: Linux - Create User Accounts
+  user:
+    name: "{{ item }}"
+    password: "{{ 'password' | password_hash('sha512') }}"
+    shell: "/bin/bash"
+    comment: 'local'
+    create_home: true
+  loop:
+    "{{ users }}"
